@@ -1,0 +1,25 @@
+---
+version: "3.9"
+services:
+  massa-node:
+    container_name: massa-node
+    image: croutondigital/massa-node:TEST.14.4
+    environment:
+      - PASSWORD=oiuiofwe9O87YkljKhkuu
+      - NETWORK=testnet
+      - LOGGING=true
+    ports:
+    - "31244:31244"
+    - "31245:31245"
+    volumes:
+    - ./config/massa-client/config:/app/massa-client/config
+    - ./config/massa-client/base_config:/app/massa-client/base_config
+    - ./config/massa-node/config:/app/massa-node/config
+    - ./config/massa-node/base_config:/app/massa-node/base_config
+    - ./config/massa-node/storage:/app/massa-node/storage    
+    deploy:
+      resources:
+        limits:
+          cpus: 4
+          memory: 8gb
+    restart: unless-stopped
